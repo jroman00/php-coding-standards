@@ -1,0 +1,8 @@
+{
+    "name": "jroman00/php-coding-standards",
+    "type": "coding-standard",
+    "description": "Additional CodeSniffer rules",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.2.2"
+    }
+}
