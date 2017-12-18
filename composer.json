@@ -1,0 +1,12 @@
+{
+    "name": "jroman00/php-coding-standards",
+    "type": "coding-standard",
+    "description": "Additional CodeSniffer rules",
+    "scripts": {
+        "phpcs": "./vendor/bin/phpcs -p --standard=jroman00/ruleset.xml jroman00/",
+        "phpcbf": "./vendor/bin/phpcbf --standard=jroman00/ruleset.xml jroman00/"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.6"
+    }
+}
