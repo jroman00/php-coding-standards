@@ -2,7 +2,14 @@
     "name": "jroman00/php-coding-standards",
     "type": "coding-standard",
     "description": "Additional CodeSniffer rules",
+    "require": {
+        "php": "^7.1"
+    },
     "require-dev": {
-        "squizlabs/php_codesniffer": "3.2.2"
+        "squizlabs/php_codesniffer": "^3.3"
+    },
+    "scripts": {
+        "phpcbf": "./vendor/bin/phpcbf -p Jroman00",
+        "phpcs": "./vendor/bin/phpcs -p Jroman00"
     }
 }

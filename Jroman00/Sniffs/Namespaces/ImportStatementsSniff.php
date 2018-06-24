@@ -2,8 +2,8 @@
 
 namespace Jroman00\Sniffs\Namespaces;
 
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
 
 class ImportStatementsSniff implements Sniff
 {

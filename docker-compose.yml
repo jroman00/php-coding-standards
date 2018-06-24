@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  php-coding-standards:
+    container_name: php-coding-standards
+    build: .
+    volumes:
+      - ${PWD}:/var/www
