@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  php-coding-standards:
-    container_name: php-coding-standards
+  jroman00_php-coding-standards:
+    container_name: jroman00_php-coding-standards
     build: .
     volumes:
       - ${PWD}:/var/www

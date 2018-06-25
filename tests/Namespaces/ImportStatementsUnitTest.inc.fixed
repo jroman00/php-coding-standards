@@ -1,0 +1,20 @@
+<?php
+
+namespace Foo;
+use Alpha;
+use Bravo;
+
+
+
+
+
+
+
+
+
+
+
+class Bar
+{
+    //
+}

@@ -2,11 +2,6 @@
 <ruleset>
     <description>The coding standard for Jroman00 itself.</description>
 
-    <!-- PSR2 -->
-    <rule ref="PSR2">
-        <exclude name="Generic.Files.LineLength" />
-    </rule>
-
     <!-- Generic -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
     <rule ref="Generic.ControlStructures.InlineControlStructure" />
@@ -14,8 +9,16 @@
     <rule ref="Generic.Formatting.SpaceAfterCast" />
     <rule ref="Generic.NamingConventions.UpperCaseConstantName" />
 
+    <!-- Jroman00 -->
+    <rule ref="Jroman00" />
+
     <!-- PEAR -->
     <rule ref="PEAR.Functions.ValidDefaultValue" />
+
+    <!-- PSR2 -->
+    <rule ref="PSR2">
+        <exclude name="Generic.Files.LineLength" />
+    </rule>
 
     <!-- Squiz -->
     <rule ref="Squiz.Classes.ValidClassName" />
@@ -26,7 +29,4 @@
         </properties>
     </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
-
-    <!-- Jroman00 -->
-    <rule ref="Jroman00" />
 </ruleset>
