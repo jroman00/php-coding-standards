@@ -1,5 +1,19 @@
 <?php
-namespace App;
+
+namespace App\Foo;
+
+
+use Foo\Bravo;
+use \Foo\Bravo;
+
+
+use Exception;
+
+
+use Foo\Alpha;
+
+use \Exception;
+
 
 class ExampleClass
 {
@@ -14,3 +28,4 @@ class ExampleClass
         return $bar();
     }
 }
+use \Foo\Alpha;

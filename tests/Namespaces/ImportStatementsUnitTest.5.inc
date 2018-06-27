@@ -1,6 +1,12 @@
 <?php
-namespace App;
 
+namespace App;
+use Foo\Bravo;
+use \Foo\Alpha;
+use Exception;
+use \Foo\Bravo;
+use Foo\Alpha;
+use \Exception;
 class ExampleClass
 {
     public function foo()

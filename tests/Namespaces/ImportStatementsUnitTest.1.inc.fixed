@@ -1,9 +1,15 @@
 <?php
 
-namespace Foo;
-use Alpha;
-use Bravo;
-class Bar
+class ExampleClass
 {
-    //
+    public function foo()
+    {
+        $foo = 'hello';
+
+        $bar = function () use ($foo) {
+            return $foo . ' world';
+        };
+
+        return $bar();
+    }
 }

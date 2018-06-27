@@ -1,6 +1,16 @@
-<?php use Alpha;
-use Bravo;
-class Foo
+<?php
+use Foo\Alpha;
+use Foo\Bravo;
+class ExampleClass
 {
-    //
+    public function foo()
+    {
+        $foo = 'hello';
+
+        $bar = function () use ($foo) {
+            return $foo . ' world';
+        };
+
+        return $bar();
+    }
 }

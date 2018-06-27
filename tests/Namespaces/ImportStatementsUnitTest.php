@@ -45,28 +45,28 @@ class ImportStatementsUnitTest extends AbstractSniffUnitTest
     {
         switch ($testFile) {
             case 'ImportStatementsUnitTest.1.inc':
-                return [
-                    4 => 1,
-                ];
-                break;
-
             case 'ImportStatementsUnitTest.2.inc':
-                return [
-                    6 => 1,
-                ];
-                break;
+                return [];
 
             case 'ImportStatementsUnitTest.3.inc':
                 return [
-                    1 => 1,
+                    15 => 1,
                 ];
-                break;
 
             case 'ImportStatementsUnitTest.4.inc':
                 return [
+                    1 => 1,
+                ];
+
+            case 'ImportStatementsUnitTest.5.inc':
+                return [
+                    4 => 1,
+                ];
+
+            case 'ImportStatementsUnitTest.6.inc':
+                return [
                     6 => 1,
                 ];
-                break;
 
             default:
                 throw new Exception('Missing case statement for $testFile: ' . $testFile);

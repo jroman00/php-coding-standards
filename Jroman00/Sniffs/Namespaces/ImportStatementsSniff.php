@@ -28,6 +28,7 @@ class ImportStatementsSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
         $actual = [];
+        $firstErrorLocation = null;
         foreach ($phpcsFile->getTokens() as $currentPosition => $token) {
             /**
              * If not a "use" token or the "use" token is from an anonymous function.
@@ -49,6 +50,10 @@ class ImportStatementsSniff implements Sniff
                 $semicolonPosition - $currentPosition - 2
             );
 
+            if ($firstErrorLocation === null) {
+                $firstErrorLocation = $currentPosition;
+            }
+
             // Keep track of the "use" statement start/end positions in case we're fixing later.
             $this->positionData[] = [
                 'start' => $currentPosition,
@@ -56,6 +61,10 @@ class ImportStatementsSniff implements Sniff
             ];
 
             $actual[] = $importString;
+        }
+
+        if (count($actual) === 0) {
+            return $phpcsFile->numTokens + 1;
         }
 
         // Start with $expected and $actual being the same before altering $expected and comparing the two.
@@ -74,7 +83,7 @@ class ImportStatementsSniff implements Sniff
 
         if ($actual !== $expected) {
             $error = 'Import statements must be unique, in alphabetical order, and contain no leading slashes.';
-            $fix = $phpcsFile->addFixableError($error, $stackPtr, 'Found');
+            $fix = $phpcsFile->addFixableError($error, $firstErrorLocation, 'Found');
             if ($fix === true) {
                 $this->fixFile($phpcsFile, $expected);
             }
