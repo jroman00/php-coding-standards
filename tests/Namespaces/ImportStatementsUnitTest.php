@@ -2,6 +2,7 @@
 
 namespace Jroman00\Sniffs\Namespaces;
 
+use Exception;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 class ImportStatementsUnitTest extends AbstractSniffUnitTest
@@ -34,13 +35,42 @@ class ImportStatementsUnitTest extends AbstractSniffUnitTest
      * The key of the array should represent the line number and the value
      * should represent the number of errors that should occur on that line.
      *
+     *
+     * @param string $testFile The name of the file being tested.
+     *
      * @return array<int, int>
+     * @throws Exception
      */
-    public function getErrorList()
+    public function getErrorList(string $testFile = '')
     {
-        return [
-            6 => 1,
-        ];
+        switch ($testFile) {
+            case 'ImportStatementsUnitTest.1.inc':
+                return [
+                    4 => 1,
+                ];
+                break;
+
+            case 'ImportStatementsUnitTest.2.inc':
+                return [
+                    6 => 1,
+                ];
+                break;
+
+            case 'ImportStatementsUnitTest.3.inc':
+                return [
+                    1 => 1,
+                ];
+                break;
+
+            case 'ImportStatementsUnitTest.4.inc':
+                return [
+                    6 => 1,
+                ];
+                break;
+
+            default:
+                throw new Exception('Missing case statement for $testFile: ' . $testFile);
+        }
     }
 
     /**

@@ -1,22 +1,9 @@
 <?php
 
 namespace Foo;
-
-
-use Bravo;
-use \Bravo;
-
-
-
-
-
 use Alpha;
-
-
-
-
+use Bravo;
 class Bar
 {
     //
 }
-use \Alpha;

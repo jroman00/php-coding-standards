@@ -112,7 +112,7 @@ class ImportStatementsSniff implements Sniff
             $endPosition = $phpcsFile->findEndOfStatement($namespacePosition);
             $phpcsFile->fixer->addContent($endPosition + 1, implode(PHP_EOL, $importStrings) . PHP_EOL);
         } else {
-            $phpcsFile->fixer->addContent(1, implode(PHP_EOL, $importStrings) . PHP_EOL);
+            $phpcsFile->fixer->addContent(0, implode(PHP_EOL, $importStrings) . PHP_EOL);
         }
 
         $phpcsFile->fixer->endChangeset();
