@@ -41,7 +41,7 @@ class ImportStatementsUnitTest extends AbstractSniffUnitTest
      * @return array<int, int>
      * @throws Exception
      */
-    public function getErrorList(string $testFile = '')
+    public function getErrorList(string $testFile = ''): array
     {
         switch ($testFile) {
             case 'ImportStatementsUnitTest.1.inc':
@@ -81,7 +81,7 @@ class ImportStatementsUnitTest extends AbstractSniffUnitTest
      *
      * @return array<int, int>
      */
-    public function getWarningList()
+    public function getWarningList(): array
     {
         return [];
     }

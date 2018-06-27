@@ -25,7 +25,7 @@ class ImportStatementsSniff implements Sniff
      * @param int $stackPtr
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr): int
     {
         $actual = [];
         $firstErrorLocation = null;
