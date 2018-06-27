@@ -15,4 +15,10 @@
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>./Jroman00/</directory>
+        </whitelist>
+    </filter>
 </phpunit>
