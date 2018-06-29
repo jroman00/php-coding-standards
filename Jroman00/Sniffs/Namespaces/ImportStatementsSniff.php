@@ -29,18 +29,33 @@ class ImportStatementsSniff implements Sniff
     {
         $actual = [];
         $firstErrorLocation = null;
-        foreach ($phpcsFile->getTokens() as $currentPosition => $token) {
+
+        $tokens = $phpcsFile->getTokens();
+
+        $skipToPosition = null;
+        foreach ($tokens as $currentPosition => $token) {
             /**
-             * If not a "use" token or the "use" token is from an anonymous function.
+             * If what we see is a closure, we essentially want to jump to the
+             * scope_closer position so that we don't accidentally process the
+             * closure's own use statement
              *
              * For example:
              *     $foo = function () use ($bar) {
              *         // ...
              *     };
              */
-            if ($token['type'] !== 'T_USE'
-                || $token['level']
-            ) {
+            if ($skipToPosition !== null && $currentPosition < $skipToPosition) {
+                continue;
+            }
+
+            $skipToPosition = null;
+            if ($token['type'] === 'T_CLOSURE') {
+                $skipToPosition = $tokens[$currentPosition]['scope_closer'];
+                continue;
+            }
+
+            // We only want to process use statements from here on out
+            if ($token['type'] !== 'T_USE') {
                 continue;
             }
 
@@ -107,10 +122,8 @@ class ImportStatementsSniff implements Sniff
         $phpcsFile->fixer->beginChangeset();
 
         foreach ($this->positionData as $positionData) {
-            for ($currentPosition = $positionData['start'];
-                 $currentPosition <= $positionData['end'] + 1;
-                 $currentPosition++) {
-                $phpcsFile->fixer->replaceToken($currentPosition, '');
+            for ($position = $positionData['start']; $position <= $positionData['end'] + 1; $position++) {
+                $phpcsFile->fixer->replaceToken($position, '');
             }
         }
 

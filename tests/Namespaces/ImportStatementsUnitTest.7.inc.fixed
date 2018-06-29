@@ -1,0 +1,9 @@
+<?php
+use Foo\Alpha;
+use Foo\Bravo;
+
+$bar = function () use ($foo) {
+    return $foo . ' world';
+};
+
+$bar('hello');

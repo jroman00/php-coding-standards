@@ -3,7 +3,7 @@
 namespace App\Foo;
 
 
-use Foo\Bravo;
+use Foo\Charlie;use Foo\Bravo;
 use \Foo\Bravo;
 
 
