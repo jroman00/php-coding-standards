@@ -73,6 +73,11 @@ class ImportStatementsUnitTest extends AbstractSniffUnitTest
                     2 => 1,
                 ];
 
+            case 'ImportStatementsUnitTest.8.inc':
+                return [
+                    5 => 1,
+                ];
+
             default:
                 throw new Exception('Missing case statement for $testFile: ' . $testFile);
         }

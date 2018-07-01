@@ -34,17 +34,21 @@ class ImportStatementsSniff implements Sniff
 
         $skipToPosition = null;
         foreach ($tokens as $currentPosition => $token) {
-            /**
+            /*
              * If what we see is a closure, we essentially want to jump to the
              * scope_closer position so that we don't accidentally process the
-             * closure's own use statement
+             * closure's own "use" language construct
+             *
+             * See http://php.net/manual/en/functions.anonymous.php
              *
              * For example:
              *     $foo = function () use ($bar) {
              *         // ...
              *     };
              */
-            if ($skipToPosition !== null && $currentPosition < $skipToPosition) {
+            if ($skipToPosition !== null
+                && $currentPosition < $skipToPosition
+            ) {
                 continue;
             }
 
@@ -54,8 +58,22 @@ class ImportStatementsSniff implements Sniff
                 continue;
             }
 
-            // We only want to process use statements from here on out
+            // We only want to process "use" tokens from here on out
             if ($token['type'] !== 'T_USE') {
+                continue;
+            }
+
+            /*
+             * If level is greater than 0, then what we are seeing is the use
+             * of traits in which case we just want to ignore them
+             *
+             * For example:
+             *     class Foo
+             *     {
+             *         use Bar;
+             *     }
+             */
+            if ($token['level'] > 0) {
                 continue;
             }
 
@@ -69,7 +87,10 @@ class ImportStatementsSniff implements Sniff
                 $firstErrorLocation = $currentPosition;
             }
 
-            // Keep track of the "use" statement start/end positions in case we're fixing later.
+            /*
+             * Keep track of each import statement's start and end positions in
+             * case we're fixing them later
+             */
             $this->positionData[] = [
                 'start' => $currentPosition,
                 'end' => $semicolonPosition,
@@ -82,18 +103,21 @@ class ImportStatementsSniff implements Sniff
             return $phpcsFile->numTokens + 1;
         }
 
-        // Start with $expected and $actual being the same before altering $expected and comparing the two.
+        /*
+         * Start with $expected and $actual being the same before altering
+         * $expected and comparing the two
+         */
         $expected = $actual;
 
-        // Remove leading backslashes.
+        // Remove leading backslashes
         array_walk($expected, function (&$importString) {
             $importString = ltrim($importString, '\\');
         });
 
-        // Alphabetize (case insensitive).
+        // Alphabetize (case insensitive)
         natcasesort($expected);
 
-        // Remove duplicates.
+        // Remove duplicates
         $expected = array_unique($expected);
 
         if ($actual !== $expected) {
@@ -114,7 +138,7 @@ class ImportStatementsSniff implements Sniff
      */
     private function fixFile(File $phpcsFile, array $expected)
     {
-        // Prepare new import statements.
+        // Prepare new import statements
         $importStrings = array_map(function (&$importString) {
             return 'use ' . $importString . ';';
         }, $expected);
@@ -127,14 +151,18 @@ class ImportStatementsSniff implements Sniff
             }
         }
 
-        // Find the start/end positions of the namespace token to place import statements immediately after it.
+        /*
+         * Find the start/end positions of the namespace token (if it exists) to
+         * place import statements immediately after. If it doesn't exist, we'll
+         * simply place them at the top of the file
+         */
         $namespacePosition = $phpcsFile->findNext(T_NAMESPACE, 0);
 
         if ($namespacePosition !== false) {
             $endPosition = $phpcsFile->findEndOfStatement($namespacePosition);
             $phpcsFile->fixer->addContent($endPosition + 1, implode(PHP_EOL, $importStrings) . PHP_EOL);
         } else {
-            $phpcsFile->fixer->addContent(0, implode(PHP_EOL, $importStrings) . PHP_EOL);
+            $phpcsFile->fixer->addContent(0, PHP_EOL . implode(PHP_EOL, $importStrings) . PHP_EOL);
         }
 
         $phpcsFile->fixer->endChangeset();

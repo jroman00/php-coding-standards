@@ -1,9 +1,15 @@
 <?php
 
-use Foo\Alpha;
+namespace App;
+
 use Foo\Bravo;
+use \Foo\Alpha;
+use Exception;
+
 class ExampleClass
 {
+    use Alpha;
+
     public function foo()
     {
         $foo = 'hello';
