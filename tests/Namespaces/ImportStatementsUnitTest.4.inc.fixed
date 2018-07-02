@@ -1,4 +1,4 @@
-<?php
+<?php 
 use Exception;
 use Foo\Alpha;
 use Foo\Bravo;
