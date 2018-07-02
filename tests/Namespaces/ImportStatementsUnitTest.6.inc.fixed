@@ -5,7 +5,7 @@ use Exception;
 use Foo\Alpha;
 use Foo\Bravo;
 use Foo\Charlie;
-
+use Foo\Delta as FooDelta;
 
 
 
