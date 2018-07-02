@@ -5,7 +5,7 @@ namespace App\Foo;
 
 use Foo\Charlie;use Foo\Bravo;
 use \Foo\Bravo;
-
+use Foo\Delta as FooDelta;
 
 use Exception;
 
