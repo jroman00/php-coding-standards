@@ -10,14 +10,14 @@ These instructions will allow you to import this project's sniffs into your own 
 
 #### Install PHP_CodeSniffer
 
-Install `PHP_CodeSniffer` by following the instructions found at [https://github.com/squizlabs/PHP_CodeSniffer/]()
+Install `PHP_CodeSniffer` by following the instructions found at https://github.com/squizlabs/PHP_CodeSniffer/
 
 #### Set Up a Custom Ruleset
 
 Define a custom `ruleset.xml` in your own project and reference it via:
 
 ```
-./vendor/bin/phpcs --standard=/path/to/custom_ruleset.xml test.php
+./vendor/bin/phpcs --standard=/path/to/ruleset.xml test.php
 ```
 
 See [PHP_CodeSniffer's Annotated ruleset.xml](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml) for more information
