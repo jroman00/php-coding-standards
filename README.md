@@ -1,6 +1,22 @@
+<!-- omit in toc -->
 # jroman00/php-coding-standards
 
 This project makes custom PHP code sniffs available to your project
+
+<!-- omit in toc -->
+## Summary
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+    - [Install PHP_CodeSniffer](#install-phpcodesniffer)
+    - [Set Up a Custom Ruleset](#set-up-a-custom-ruleset)
+  - [Installation](#installation)
+    - [1. Add a Custom VCS](#1-add-a-custom-vcs)
+    - [2. Require jroman/php-coding-standards](#2-require-jromanphp-coding-standards)
+    - [3. Add a Custom `installed_path` Entry](#3-add-a-custom-installedpath-entry)
+    - [4. Add the Custom Rule](#4-add-the-custom-rule)
+    - [5. Lint Your Code](#5-lint-your-code)
+- [Contributing](#contributing)
 
 ## Getting Started
 
