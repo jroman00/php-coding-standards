@@ -1,6 +1,6 @@
 # jroman00/php-coding-standards
 
-This project makes custom code sniffs available to your project
+This project makes custom PHP code sniffs available to your project
 
 ## Getting Started
 
