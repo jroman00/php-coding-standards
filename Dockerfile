@@ -1,12 +1,15 @@
-FROM php:7.0.30-cli-alpine3.7
+FROM php:7.1.33-cli-buster
 
 # Install services
-RUN apk add --no-cache --update $PHPIZE_DEPS
+RUN apt-get update \
+  && apt-get install -y \
+    $PHPIZE_DEPS \
+    git
 
-# Install Xdebug
+# Install PHP extensions
 RUN pecl install xdebug
 
-# Enable php extensions
+# Enable PHP extensions
 RUN docker-php-ext-enable xdebug
 
 # Include composer
@@ -15,3 +18,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy source code
 WORKDIR /var/www
 COPY . /var/www
+
+# Install application dependencies
+RUN composer install

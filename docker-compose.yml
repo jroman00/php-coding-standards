@@ -1,8 +1,9 @@
 version: '3'
 
 services:
-  jroman00_php-coding-standards:
-    container_name: jroman00_php-coding-standards
+  jroman00.php-coding-standards:
+    container_name: jroman00.php-coding-standards
     build: .
     volumes:
-      - ${PWD}:/var/www
+      - ${PWD}:/var/www:delegated
+      - ~/.composer/auth.json:/root/.composer/auth.json:ro

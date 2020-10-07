@@ -1,0 +1,18 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker build
+        run: |
+          docker build . -t jroman00/php-coding-standards:${GITHUB_SHA::8}
+      - name: Run linting
+        run: |
+          docker run jroman00/php-coding-standards:${GITHUB_SHA::8} make lint
+      - name: Run tests
+        run: |
+          docker run jroman00/php-coding-standards:${GITHUB_SHA::8} make test
