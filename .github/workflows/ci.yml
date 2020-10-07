@@ -16,3 +16,15 @@ jobs:
       - name: Run tests
         run: |
           docker run jroman00/php-coding-standards:${GITHUB_SHA::8} make test
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1.5.2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1.2.2
+      - name: Push image to Amazon ECR
+        run: |
+          docker tag jroman00/php-coding-standards:${GITHUB_SHA::8} 814294563857.dkr.ecr.us-east-1.amazonaws.com/jroman00/php-coding-standards:${GITHUB_SHA::8}
+          docker push 814294563857.dkr.ecr.us-east-1.amazonaws.com/jroman00/php-coding-standards:${GITHUB_SHA::8}
