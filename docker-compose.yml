@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
   jroman00.php-coding-standards:

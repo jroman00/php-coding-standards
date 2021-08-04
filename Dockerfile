@@ -1,4 +1,4 @@
-FROM php:7.1.33-cli-buster
+FROM php:7.2.34-cli-buster
 
 # Install services
 RUN apt-get update \
@@ -7,7 +7,8 @@ RUN apt-get update \
     git
 
 # Install PHP extensions
-RUN pecl install xdebug
+RUN pecl channel-update pecl.php.net \
+  && pecl install xdebug
 
 # Enable PHP extensions
 RUN docker-php-ext-enable xdebug

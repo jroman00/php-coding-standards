@@ -19,7 +19,7 @@ main() {
 
     # Install dependencies
     echo "Installing dependencies..."
-    docker-compose run --rm jroman00_php-coding-standards composer install
+    docker-compose run --rm jroman00.php-coding-standards composer install
   )
 
   echo "Repo initialized successfully!"

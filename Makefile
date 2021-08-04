@@ -10,7 +10,7 @@ lint-fix:
 	composer run lint-fix
 
 shell:
-	docker-compose run --rm jroman00_php-coding-standards bash
+	docker-compose run --rm jroman00.php-coding-standards bash
 
 test:
 	composer run test
