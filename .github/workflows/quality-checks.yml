@@ -1,0 +1,31 @@
+name: Quality Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  PR_NUMBER: ${{ github.event.number }}
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint Code
+        run: |
+          set -e
+          set -o pipefail
+
+          ls -al /usr/src/vendor/bin
+          docker-compose run --rm --no-deps jroman00.php-coding-standards make lint
+
+      - name: Run Tests
+        run: |
+          set -e
+          set -o pipefail
+
+          ls -al /usr/src/vendor/bin
+          docker-compose run --rm --no-deps jroman00.php-coding-standards make test
