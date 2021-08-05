@@ -5,5 +5,5 @@ services:
     container_name: jroman00.php-coding-standards
     build: .
     volumes:
-      - ${PWD}:/var/www:delegated
+      - ${PWD}:/usr/src:delegated
       - ~/.composer/auth.json:/root/.composer/auth.json:ro

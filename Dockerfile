@@ -17,8 +17,8 @@ RUN docker-php-ext-enable xdebug
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy source code
-WORKDIR /var/www
-COPY . /var/www
+WORKDIR /usr/src
+COPY . /usr/src
 
 # Install application dependencies
 RUN composer install
