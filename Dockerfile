@@ -8,7 +8,7 @@ RUN apt-get update \
 
 # Install PHP extensions
 RUN pecl channel-update pecl.php.net \
-  && pecl install xdebug
+  && pecl install xdebug-3.1.0
 
 # Enable PHP extensions
 RUN docker-php-ext-enable xdebug
