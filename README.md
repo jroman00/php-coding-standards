@@ -6,17 +6,15 @@ This project makes custom PHP code sniffs available to your project
 <!-- omit in toc -->
 ## Table of Contents
 
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-    - [Install PHP_CodeSniffer](#install-php_codesniffer)
-    - [Set Up a Custom Ruleset](#set-up-a-custom-ruleset)
-  - [Installation](#installation)
-    - [1. Add a Custom VCS](#1-add-a-custom-vcs)
-    - [2. Require jroman/php-coding-standards](#2-require-jromanphp-coding-standards)
-    - [3. Add a Custom `installed_path` Entry](#3-add-a-custom-installed_path-entry)
-    - [4. Add the Custom Rule](#4-add-the-custom-rule)
-    - [5. Lint Your Code](#5-lint-your-code)
-- [Contributing](#contributing)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+    * [Install PHP\_CodeSniffer](#install-php_codesniffer)
+  * [Installation](#installation)
+    * [1. Add a Custom VCS](#1-add-a-custom-vcs)
+    * [2. Require this Library](#2-require-this-library)
+    * [3. Define a Custom Ruleset.xml](#3-define-a-custom-rulesetxml)
+    * [4. Lint Your Code](#4-lint-your-code)
+* [Contributing](#contributing)
 
 ## Getting Started
 
@@ -26,15 +24,13 @@ These instructions will allow you to import this project's sniffs into your own 
 
 #### Install PHP_CodeSniffer
 
-Install `PHP_CodeSniffer` by following the instructions found at https://github.com/squizlabs/PHP_CodeSniffer/
+```sh
+composer require --dev squizlabs/phpcs
+```
 
-#### Set Up a Custom Ruleset
-
-Define a custom `ruleset.xml` in your own project. See [PHP_CodeSniffer's Annotated ruleset.xml](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml) for more information
+For more information, see https://github.com/squizlabs/PHP_CodeSniffer/
 
 ### Installation
-
-Once a custom `ruleset.xml` is set up, you'll need to do the following:
 
 #### 1. Add a Custom VCS
 
@@ -47,34 +43,43 @@ In your `composer.json` file, add `https://github.com/jroman00/php-coding-standa
 }],
 ```
 
-#### 2. Require jroman/php-coding-standards
+#### 2. Require this Library
 
 Import this project via composer, by running the following:
 
-```bash
+```sh
 composer require --dev jroman00/php-coding-standards
 ```
 
-#### 3. Add a Custom `installed_path` Entry
+#### 3. Define a Custom Ruleset.xml
 
-Add the following line to your `ruleset.xml` file
+In your `ruleset.xml`, add the following:
 
-```xml
-<config name="installed_paths" value="vendor/jroman00/php-coding-standards" />
-```
-
-#### 4. Add the Custom Rule
-
-Add the `Jroman00` ruleset to `ruleset.xml`
+1. An entry for `installed_paths` for this library
+2. A rule for this library
 
 ```xml
-<rule ref="Jroman00" />
+<?xml version="1.0"?>
+<ruleset>
+    <description>Coding standards</description>
+
+    <!-- jroman00/php-coding-standards -->
+    <config name="installed_paths" value="vendor/jroman00/php-coding-standards" />
+
+    <!-- Jroman00 -->
+    <rule ref="Jroman00" />
+
+    <!-- Additional configs can go here -->
+    <!-- ... -->
+</ruleset>
 ```
 
-#### 5. Lint Your Code
+For more information, see [PHP_CodeSniffer's Annotated ruleset.xml](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml)
 
-```bash
-./vendor/bin/phpcs --standard=./ruleset.xml example.php
+#### 4. Lint Your Code
+
+```sh
+./vendor/bin/phpcs -p --standard=./ruleset.xml src/
 ```
 
 ## Contributing
