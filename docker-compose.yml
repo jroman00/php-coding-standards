@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   jroman00.php-coding-standards:
     container_name: jroman00.php-coding-standards

@@ -13,13 +13,13 @@ main() {
     # Make sure script is running from the main application directory
     cd $APP_DIR
 
-    # Build docker images
-    echo "Building docker images with docker-compose..."
-    docker-compose build
+    # Build images
+    echo "Building images..."
+    docker compose build
 
     # Install dependencies
     echo "Installing dependencies..."
-    docker-compose run --rm jroman00.php-coding-standards composer install
+    docker compose run --rm jroman00.php-coding-standards composer install
   )
 
   echo "Repo initialized successfully!"
